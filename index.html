@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonom</title>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+       <video
+        loop id="myVideo"
+        src="./videos/just_humming.mp4"
+       ></video>
+       <nav>
+        <button id="playButton">Play</button>
+        <button id="stopButton">Stop</button>
+       <button id="muteButton">Mute</button>
+       <button id="addMusic">Add music</button>
+       </nav>
+    
+    <script>
+        let musicOn = false
+        const video = document.getElementById('myVideo')
+        const playButton = document.getElementById('playButton')
+        const muteButton = document.getElementById('muteButton')
+        const stopButton = document.getElementById('stopButton')
+        const addMusic = document.getElementById('addMusic')
+
+        addMusic.addEventListener("click",()=>{
+            const currentTime = video.currentTime
+            video.pause()
+            if(musicOn){
+                video.src = "./videos/just_humming.mp4"
+                addMusic.innerText = "Add music"
+            } else {
+                video.src = "./videos/brushing_sound_3.mp4"
+                addMusic.innerText = "Mute music"
+            }
+            video.currentTime = currentTime
+            video.play()
+            musicOn = !musicOn
+        })
+        
+        stopButton.addEventListener("click",()=>{
+                video.pause()
+                video.currentTime = 0
+                playButton.innerText = "Play"
+        })
+
+        muteButton.addEventListener("click",()=>{
+            if(video.muted){
+                video.muted = false
+                muteButton.innerText = "Mute"
+            } else {
+                video.muted = true
+                muteButton.innerText = "Unmute"
+            }
+        })
+
+        playButton.addEventListener('click', () => {
+            if (video.paused) {
+                video.play()
+                playButton.innerText = "Pause"
+            } else {
+                video.pause()
+                playButton.innerText = "Play"
+            }
+        })
+    </script>
+</body>
+</html>
